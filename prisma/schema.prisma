@@ -18,6 +18,7 @@ model User {
   firstName String
   lastName  String
   role      UserRole @default(USER)
+  isAdmin  Boolean  @default(false)
   isActive  Boolean  @default(true)
   employee  Employee?
   createdAt DateTime @default(now())
@@ -49,6 +50,7 @@ model Employee {
   city          String?
   state         String?
   zipCode       String?
+  image       String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -174,6 +176,8 @@ model Order {
   notes         String?
   items         OrderItem[]
   invoices      Invoice[]
+  userId    String
+  createdBy      User @relation(fields: [userId], references: [id])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
